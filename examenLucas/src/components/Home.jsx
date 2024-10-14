@@ -14,9 +14,9 @@ function Home() {
 
   return (
     <div className="home">
-      <h1>Adivina el número!!</h1>
+      <h1>Welcome to the Number Guessing Game!</h1>
       <input type="text" placeholder="Enter your name" ref={nameRef} />
-      <button onClick={startGame}>Empezar Juego</button>
+      <button onClick={startGame}>Start Game</button>
     </div>
   );
 }

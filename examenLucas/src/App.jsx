@@ -5,12 +5,14 @@ import Game from './components/Game';
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<Game />} />
       </Routes>
     </Router>
+    </>
   );
 }
 

@@ -10,7 +10,7 @@ function Game() {
   const [guess, setGuess] = useState('');
   const [feedback, setFeedback] = useState('');
   const [attempts, setAttempts] = useState(0);
-  const [ganado, setGanado] = useState(false);
+  const [hasWon, setHasWon] = useState(false);
 
   useEffect(() => {
     setRandomNumber(Math.floor(Math.random() * 100) + 1);
@@ -20,28 +20,28 @@ function Game() {
     const numGuess = parseInt(guess);
     setAttempts(attempts + 1);
     if (numGuess < randomNumber) {
-      setFeedback('Muy bajo!!');
+      setFeedback('Too low!');
     } else if (numGuess > randomNumber) {
-      setFeedback('Muy alto!!');
+      setFeedback('Too high!');
     } else {
-      setFeedback('Correcto!');
-      setGanado(true);
+      setFeedback('Correct!');
+      setHasWon(true);
     }
   };
 
   return (
     <div className="game">
-      <h2>Hola, {playerName}! Adivina el juego!</h2>
+      <h2>Hello, {playerName}! Guess the number!</h2>
       <div className="number-box">
-        {ganado ? randomNumber : '?'}
+        {hasWon ? randomNumber : '?'}
       </div>
       <input
         type="number"
         value={guess}
         onChange={(e) => setGuess(e.target.value)}
-        disabled={ganado}
+        disabled={hasWon}
       />
-      <button onClick={handleGuess} disabled={ganado}>Guess</button>
+      <button onClick={handleGuess} disabled={hasWon}>Guess</button>
       <Feedback message={feedback} />
       <p>Attempts: {attempts}</p>
     </div>
