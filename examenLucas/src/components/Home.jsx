@@ -6,17 +6,17 @@ function Home() {
   const navigate = useNavigate();
 
   const startGame = () => {
-    const playerName = nameRef.current.value;
-    if (playerName) {
-      navigate('/game', { state: { playerName } });
+    const nombreJugador = nameRef.current.value;
+    if (nombreJugador) {
+      navigate('/game', { state: { nombreJugador } });
     }
   };
 
   return (
     <div className="home">
-      <h1>Welcome to the Number Guessing Game!</h1>
-      <input type="text" placeholder="Enter your name" ref={nameRef} />
-      <button onClick={startGame}>Start Game</button>
+      <h1>Bienvenidx a Adivina el Número</h1>
+      <input type="text" placeholder="Introduce tu nombre" ref={nameRef} />
+      <button onClick={startGame}>Iniciar Juego</button>
     </div>
   );
 }

@@ -1,49 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Feedback from './Feedback';
 
 function Game() {
   const { state } = useLocation();
-  const playerName = state.playerName;
+  const nombreJugador = state.nombreJugador;
+  const navigate = useNavigate();
 
-  const [randomNumber, setRandomNumber] = useState(null);
-  const [guess, setGuess] = useState('');
+  const [numeroRandom, setnumeroRandom] = useState(null);
+  const [adivinando, setAdivinando] = useState('');
   const [feedback, setFeedback] = useState('');
-  const [attempts, setAttempts] = useState(0);
-  const [hasWon, setHasWon] = useState(false);
+  const [intentos, setAttempts] = useState(0);
+  const [ganado, setGanado] = useState(false);
 
   useEffect(() => {
-    setRandomNumber(Math.floor(Math.random() * 100) + 1);
+    setnumeroRandom(Math.floor(Math.random() * 100) + 1);
   }, []);
 
-  const handleGuess = () => {
-    const numGuess = parseInt(guess);
-    setAttempts(attempts + 1);
-    if (numGuess < randomNumber) {
-      setFeedback('Too low!');
-    } else if (numGuess > randomNumber) {
-      setFeedback('Too high!');
+  const handleAdivinanza = () => {
+    const numAdivinar = parseInt(adivinando);
+    console.log(numeroRandom)
+    setAttempts(intentos + 1);
+    if (numAdivinar < numeroRandom) {
+      setFeedback('⬆️');
+    } else if (numAdivinar > numeroRandom) {
+      setFeedback('⬇️');
     } else {
-      setFeedback('Correct!');
-      setHasWon(true);
+      setFeedback('⭐');
+      setGanado(true);
     }
   };
 
+  const again = () => {
+    navigate("/")
+  }
   return (
     <div className="game">
-      <h2>Hello, {playerName}! Guess the number!</h2>
+      <h2>Hola {nombreJugador}! Adivina el número!</h2>
+      <p>del 1 al 100</p>
       <div className="number-box">
-        {hasWon ? randomNumber : '?'}
+        <h1>
+        {ganado ? numeroRandom : '?'}
+      </h1>
       </div>
+      <Feedback message={feedback} />
       <input
         type="number"
-        value={guess}
-        onChange={(e) => setGuess(e.target.value)}
-        disabled={hasWon}
+        value={adivinando}
+        onChange={(e) => setAdivinando(e.target.value)}
+        disabled={ganado}
       />
-      <button onClick={handleGuess} disabled={hasWon}>Guess</button>
-      <Feedback message={feedback} />
-      <p>Attempts: {attempts}</p>
+      <button onClick={handleAdivinanza} disabled={ganado}>Adivinar</button>
+      <h1>Intentos: {intentos}</h1>
+      <button onClick={again}>De nuevo</button>
     </div>
   );
 }
