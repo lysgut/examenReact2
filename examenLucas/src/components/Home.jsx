@@ -16,7 +16,7 @@ function Home() {
     <div className="home">
       <h1>Bienvenidx a Adivina el Número</h1>
       <input type="text" placeholder="Introduce tu nombre" ref={nameRef} />
-      <button onClick={startGame}>Iniciar Juego</button>
+      <button onClick={startGame}> Iniciar Juego </button>
     </div>
   );
 }
